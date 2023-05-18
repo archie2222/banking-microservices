@@ -1,0 +1,40 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+                   logicalFilePath="db.changelog-1.0.0.xml">
+    <changeSet author="user" id="037793c5-e001-4971-911f-3ffd881f520e">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="customer"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="user">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted" type="datetime"/>
+            <column name="updated" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="surname" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="designation" type="VARCHAR(255)"/>
+            <column name="mobile" type="VARCHAR(255)"/>
+            <column name="branch" type="VARCHAR(255)"/>
+        </createTable>
+
+        <addPrimaryKey tableName="user" columnNames="id"
+                       constraintName="PK_user_directive_id"/>
+
+        <createIndex tableName="user" indexName="IDX_user_created">
+            <column name="created" type="datetime"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
