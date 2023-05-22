@@ -3,6 +3,7 @@ package com.banking.ewallet.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountType extends AuditableBase{
+public class CustomerType extends AuditableBase{
     @Id
     @GeneratedValue(
             generator = "UUID"
@@ -25,5 +26,6 @@ public class AccountType extends AuditableBase{
     )
     private String id;
     private String name;
-    private Charge charge;
+    @OneToOne(mappedBy = "customer")
+    private Customer customer;
 }
