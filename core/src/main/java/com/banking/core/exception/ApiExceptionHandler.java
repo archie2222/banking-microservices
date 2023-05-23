@@ -1,5 +1,6 @@
 package com.banking.core.exception;
 
+import com.banking.core.dto.kyc.KycDto;
 import com.banking.core.dto.transaction.WalletTransactionDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,11 @@ public class ApiExceptionHandler {
         log.error(e.getMessage());
         return ResponseEntity.ok(transactionDto);
     }
-
+    @ExceptionHandler(TransactionException.class)
+    public ResponseEntity<Object> handleTransactionException(TransactionException e, KycDto transactionDto) {
+        log.error(e.getMessage());
+        return ResponseEntity.ok(transactionDto);
+    }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleRequestException(Exception e, WalletTransactionDto transactionDto) {
         log.error(e.getMessage());
