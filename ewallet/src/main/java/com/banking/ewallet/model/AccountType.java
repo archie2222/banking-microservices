@@ -1,8 +1,6 @@
 package com.banking.ewallet.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,5 +23,7 @@ public class AccountType extends AuditableBase{
     )
     private String id;
     private String name;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "charge", referencedColumnName = "id")
     private Charge charge;
 }

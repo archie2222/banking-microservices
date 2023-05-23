@@ -26,6 +26,6 @@ public class CustomerType extends AuditableBase{
     )
     private String id;
     private String name;
-    @OneToOne(mappedBy = "customer")
+    @OneToOne(mappedBy = "customerType")
     private Customer customer;
 }

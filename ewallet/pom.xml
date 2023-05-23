@@ -9,7 +9,7 @@
     </parent>
     <artifactId>ewallet</artifactId>
     <name>ewallet</name>
-    <description>Banking Switch</description>
+    <description>E-Wallet App</description>
     <properties>
         <java.version>17</java.version>
     </properties>

@@ -20,6 +20,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Table(name = "customer")
 public class Customer extends AuditableBase {
     @Id
     @GeneratedValue(
@@ -36,8 +37,8 @@ public class Customer extends AuditableBase {
     private String designation;
     private String msisdn;
     private String status;
-    @JsonManagedReference("account")
-    @OneToMany(mappedBy = "account")
+    @JsonManagedReference("customer")
+    @OneToMany(mappedBy = "customer")
     private Set<Account> account = new HashSet<>(0);
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "branch_id", referencedColumnName = "id")

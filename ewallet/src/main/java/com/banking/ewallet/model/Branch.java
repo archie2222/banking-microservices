@@ -27,6 +27,6 @@ public class Branch extends AuditableBase{
     private String id;
     private String name;
     private String code;
-    @OneToOne(mappedBy = "customer")
+    @OneToOne(mappedBy = "branch")
     private Customer customer;
 }
