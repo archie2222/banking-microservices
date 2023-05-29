@@ -1,11 +1,9 @@
 package com.banking.core.dto.kyc;
 
 import com.banking.core.dto.transaction.WalletAccountDto;
-import com.banking.core.dto.transaction.WalletCardDto;
 import lombok.*;
 
-import java.math.BigDecimal;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Set;
 @Getter
@@ -19,8 +17,17 @@ public class KycDto {
     private String lastName;
     private String title;
     private String nationalId;
+    private String customerTypeId;
+    private String customerId;
+    private String cardId;
+    private String accountId;
+    private String branchId;
+    private String accountTypeId;
+    private String currencyId;
     private String address;
     private String msisdn;
+    private String email;
+    private LocalDate dob;
     private String narration;
     private String reference;
     private String responseCode;

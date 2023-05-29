@@ -22,5 +22,4 @@ public class KycController {
     public ResponseEntity<KycDto> processCustomerRequest(@RequestBody KycDto request) {
         return ResponseEntity.ok(kycService.processRequest(request));
     }
-
 }

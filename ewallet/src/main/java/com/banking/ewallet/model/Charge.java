@@ -29,6 +29,5 @@ public class Charge extends AuditableBase{
     private String id;
     private BigDecimal amount;
     private String description;
-    @OneToOne(mappedBy = "charge")
-    private AccountType accountType;
+    private String currency;
 }

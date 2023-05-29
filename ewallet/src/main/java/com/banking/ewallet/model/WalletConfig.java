@@ -1,7 +1,8 @@
 package com.banking.ewallet.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -11,7 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CustomerType extends AuditableBase{
+public class WalletConfig {
     @Id
     @GeneratedValue(
             generator = "UUID"
@@ -21,5 +22,5 @@ public class CustomerType extends AuditableBase{
             strategy = "org.hibernate.id.UUIDGenerator"
     )
     private String id;
-    private String name;
+    private String accountNumberCount;
 }

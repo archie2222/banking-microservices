@@ -23,7 +23,8 @@ public class AccountType extends AuditableBase{
     )
     private String id;
     private String name;
-    @OneToOne(cascade = CascadeType.ALL)
+    private String currency;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "charge", referencedColumnName = "id")
     private Charge charge;
 }
