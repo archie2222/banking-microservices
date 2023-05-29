@@ -68,7 +68,7 @@ public class KycServiceImpl implements KycService {
 
         Account account = Account
                 .builder()
-                .currency(currency.getName())
+                .currency(currency)
                 .number(generateAccountNumber(branch, walletConfig, currency.getCode()))
                 .customer(newCustomer)
                 .accountType(accountType)
@@ -112,7 +112,7 @@ public class KycServiceImpl implements KycService {
         }
         Account account = Account
                 .builder()
-                .currency(currency.getName())
+                .currency(currency)
                 .number(generateAccountNumber(customer.getBranch(), walletConfig, currency.getCode()))
                 .customer(customer)
                 .accountType(accountType)
