@@ -40,14 +40,9 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(TransactionException.class)
-    public ResponseEntity<Object> handleTransactionException(TransactionException e, WalletTransactionDto transactionDto) {
+    public ResponseEntity<Object> handleTransactionException(TransactionException e, Object o) {
         log.error(e.getMessage());
-        return ResponseEntity.ok(transactionDto);
-    }
-    @ExceptionHandler(TransactionException.class)
-    public ResponseEntity<Object> handleTransactionException(TransactionException e, KycDto transactionDto) {
-        log.error(e.getMessage());
-        return ResponseEntity.ok(transactionDto);
+        return ResponseEntity.ok(o);
     }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleRequestException(Exception e, WalletTransactionDto transactionDto) {

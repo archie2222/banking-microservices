@@ -1,4 +1,4 @@
-package com.banking.messagebroker.config;
+package com.banking.notification.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;

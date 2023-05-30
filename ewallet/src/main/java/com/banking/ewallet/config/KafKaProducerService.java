@@ -1,9 +1,9 @@
-package com.banking.messagebroker.config;
+package com.banking.ewallet.config;
 
+import com.banking.core.dto.kyc.KycDto;
 import com.banking.core.dto.transaction.WalletTransactionDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class KafKaProducerService {
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    public void sendMessage(WalletTransactionDto dto)
+    public void sendMessage(KycDto dto)
     {
         log.info(String.format("Request: -> %s", dto));
         this.kafkaTemplate.send("transactionJsonTopic", dto);

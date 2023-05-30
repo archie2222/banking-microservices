@@ -5,6 +5,7 @@ import com.banking.core.dto.api.ResponseDescription;
 import com.banking.core.dto.kyc.KycDto;
 import com.banking.core.dto.transaction.TranType;
 import com.banking.core.exception.TransactionException;
+import com.banking.ewallet.config.KafKaProducerService;
 import com.banking.ewallet.model.*;
 import com.banking.ewallet.repository.*;
 import com.banking.ewallet.service.iface.KycService;
@@ -27,6 +28,7 @@ public class KycServiceImpl implements KycService {
     private final WalletConfigRepository walletConfigRepository;
     private final CurrencyRepository currencyRepository;
     private final CardRepository cardRepository;
+    private final KafKaProducerService producerService;
     private static final String ACCOUNT = "ACCOUNT";
     private static final String DISABLED = "DISABLED";
     private static final String CARD_NOT_FOUND = "Card not found";
@@ -79,6 +81,9 @@ public class KycServiceImpl implements KycService {
         kycDto.setResponseCode(ResponseCode.SUCCESSFUL);
         kycDto.setResponseDescription(ResponseDescription.SUCCESSFUL);
         kycDto.getStructureData().put(ACCOUNT, account);
+        kycDto.getStructureData().put("CUSTOMER", customer);
+
+        this.producerService.sendMessage(kycDto);
         return kycDto;
     }
 
@@ -123,6 +128,8 @@ public class KycServiceImpl implements KycService {
         kycDto.setResponseCode(ResponseCode.SUCCESSFUL);
         kycDto.setResponseDescription(ResponseDescription.SUCCESSFUL);
         kycDto.getStructureData().put(ACCOUNT, account);
+
+        this.producerService.sendMessage(kycDto);
         return kycDto;
     }
 

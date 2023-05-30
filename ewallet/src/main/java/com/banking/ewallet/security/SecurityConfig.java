@@ -27,8 +27,6 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(authz -> authz
-//                .requestMatchers(HttpMethod.GET, "/api/**").hasAuthority("admin")
-//                .requestMatchers("/api/**").authenticated()
                 .anyRequest().permitAll()
         );
         http.oauth2ResourceServer()

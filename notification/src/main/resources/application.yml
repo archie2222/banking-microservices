@@ -4,29 +4,21 @@ spring:
   liquibase:
     change-log: classpath:/liquibase/db.changelog-master.xml
     enabled: true
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8100/auth/realms/banking-system
-          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
-      client:
-        registration:
-          gateway:
-            provider: my-provider
-            client-id: test
-            client-secret: zmZDb5OcWng9o6XWnutG6w1pzho21bRC
-            authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8100/*
-            scope:
-              - message.read
-        provider:
-          my-provider:
-            issuer-uri: http://localhost:8100/auth/realms/banking-system
-
+  kafka:
+    consumer:
+      bootstrap-servers: "localhost:9092"
+      group-id: txn-banking
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
 
   datasource:
-    url: jdbc:postgresql://localhost:4321/banking
+    url: jdbc:postgresql://localhost:4321/notification
     password: notes
     username: postgres
     sql:
@@ -47,10 +39,3 @@ spring:
     allow-bean-definition-overriding: true
   application:
     name: notification-service
-
-
-jwt:
-  auth:
-    converter:
-      resource-id: springboot-keycloak-client
-      principal-attribute: preferred_username
