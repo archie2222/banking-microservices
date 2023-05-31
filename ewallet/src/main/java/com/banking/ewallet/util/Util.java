@@ -8,10 +8,12 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Util {
     private static final Logger log = LoggerFactory.getLogger(Util.class);
     private static ObjectMapper objectMapper = new ObjectMapper();
+
     public static String toJson(Object object) {
         try {
             objectMapper.configure(SerializationFeature.WRAP_EXCEPTIONS, false);
@@ -25,6 +27,7 @@ public class Util {
             return null;
         }
     }
+
     public static <T> T fromJson(String string, Class<T> type) {
         try {
             return fromJsonUnCaught(string, type);
@@ -33,9 +36,11 @@ public class Util {
             return null;
         }
     }
+
     public static <T> T fromJsonUnCaught(String string, Class<T> type) throws IOException {
         return objectMapper.readValue(string, type);
     }
+
     public static <T> T fromJsonMap(LinkedHashMap linkedHashMap, Class<T> type) {
         return objectMapper.convertValue(linkedHashMap, type);
     }

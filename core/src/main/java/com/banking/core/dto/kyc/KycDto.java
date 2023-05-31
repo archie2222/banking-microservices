@@ -19,6 +19,7 @@ public class KycDto {
     private String nationalId;
     private String customerTypeId;
     private String customerId;
+    private String chargeId;
     private String cardId;
     private String accountId;
     private String branchId;
@@ -33,6 +34,7 @@ public class KycDto {
     private String responseCode;
     private String responseDescription;
     private String transactionType;
+    private String descriptiveTransactionType;
     private String propagatedResponseCode;
     private String propagatedResponseDescription;
     private Map<String, Object> structureData;

@@ -3,6 +3,7 @@ package com.banking.ewallet.service.impl;
 import com.banking.core.dto.api.ResponseCode;
 import com.banking.core.dto.api.ResponseDescription;
 import com.banking.core.dto.kyc.KycDto;
+import com.banking.core.dto.transaction.DescriptiveType;
 import com.banking.core.dto.transaction.TranType;
 import com.banking.core.exception.TransactionException;
 import com.banking.ewallet.config.KafKaProducerService;
@@ -181,7 +182,7 @@ public class KycServiceImpl implements KycService {
         return kycDto;
     }
 
-    @Transactional
+
     public synchronized String generateAccountNumber(Branch branch, WalletConfig walletConfig, String currencyCode) {
         long count = Long.parseLong(walletConfig.getAccountNumberCount());
         String accountNumber = branch.getCode().concat(walletConfig.getAccountNumberCount()).concat(currencyCode);
@@ -192,14 +193,14 @@ public class KycServiceImpl implements KycService {
 
     @Override
     public KycDto processRequest(KycDto kycDto) {
-        return switch (kycDto.getTransactionType()) {
-            case TranType.CUSTOMER_ENROLMENT -> createNewCustomer(kycDto);
-            case TranType.CARD_LINKING -> attachCardToAccount(kycDto);
-            case TranType.ACCOUNT_DISABLEMENT -> disableAccount(kycDto);
-            case TranType.CARD_DISABLEMENT -> disableCard(kycDto);
-            case TranType.CUSTOMER_DISABLEMENT -> disableCustomer(kycDto);
-            case TranType.ACCOUNT_CREATION -> createNewAccount(kycDto);
-            case TranType.CARD_DELINKING -> detachCardFromAccount(kycDto);
+        return switch (kycDto.getDescriptiveTransactionType()) {
+            case DescriptiveType.CUSTOMER_ENROLMENT -> createNewCustomer(kycDto);
+            case DescriptiveType.CARD_LINKING -> attachCardToAccount(kycDto);
+            case DescriptiveType.ACCOUNT_DISABLEMENT -> disableAccount(kycDto);
+            case DescriptiveType.CARD_DISABLEMENT -> disableCard(kycDto);
+            case DescriptiveType.CUSTOMER_DISABLEMENT -> disableCustomer(kycDto);
+            case DescriptiveType.ACCOUNT_CREATION -> createNewAccount(kycDto);
+            case DescriptiveType.CARD_DELINKING -> detachCardFromAccount(kycDto);
             default -> throw new TransactionException("Transaction type not found", kycDto);
         };
     }
